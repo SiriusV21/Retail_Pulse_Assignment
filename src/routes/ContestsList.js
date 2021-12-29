@@ -157,7 +157,7 @@ const ContestsList = ({ data, setContest }) => {
                                             <List.Item.Meta
                                                 avatar={
                                                     favContest[item.id] ? (
-                                                        <HeartTwoTone
+                                                        <HeartTwoTone twoToneColor="#eb2f96"
                                                             onClick={() => {
                                                                 toggleFavorite(
                                                                     item.id,

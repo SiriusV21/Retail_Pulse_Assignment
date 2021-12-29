@@ -23,9 +23,8 @@ const ContestsList = ({ data, setContest }) => {
     const [contestType, setContestType] = useState('');
     const [runge, setRunge] = useState([1, 10]);
     const [showFav, setShowFav] = useState(false);
-
     const [favContest, setFavContest] = useState({});
-
+    const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     const { Option } = Select;
 
@@ -95,6 +94,9 @@ const ContestsList = ({ data, setContest }) => {
     };
     const toggleCheckbox = (e) => {
         setShowFav(e.target.checked);
+        setRunge([1, 10]);
+        setCurrentPage(1);
+        //console.log(runge);
     };
     return (
         <>
@@ -127,8 +129,10 @@ const ContestsList = ({ data, setContest }) => {
                             <List
                                 bordered
                                 pagination={{
+                                    current: currentPage,
                                     onChange: (page, pageSize) => {
                                         setRunge([page, pageSize]);
+                                        setCurrentPage(page);
                                     },
                                     showTotal: (total, range) =>
                                         `${range[0]}-${range[1]} of ${total} items`,
@@ -153,7 +157,7 @@ const ContestsList = ({ data, setContest }) => {
                                             <List.Item.Meta
                                                 avatar={
                                                     favContest[item.id] ? (
-                                                        <HeartTwoTone twoToneColor="#eb2f96"
+                                                        <HeartTwoTone
                                                             onClick={() => {
                                                                 toggleFavorite(
                                                                     item.id,
